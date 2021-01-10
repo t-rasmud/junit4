@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 import org.junit.FixMethodOrder;
 
+import org.checkerframework.checker.determinism.qual.*;
+
 public class MethodSorter {
     /**
      * DEFAULT sort order
@@ -51,7 +53,7 @@ public class MethodSorter {
     public static Method[] getDeclaredMethods(Class<?> clazz) {
         Comparator<Method> comparator = getSorter(clazz.getAnnotation(FixMethodOrder.class));
 
-        Method[] methods = clazz.getDeclaredMethods();
+        @Det Method @Det[] methods = clazz.getDeclaredMethods();
         if (comparator != null) {
             Arrays.sort(methods, comparator);
         }
